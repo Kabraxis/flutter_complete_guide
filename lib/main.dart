@@ -11,22 +11,50 @@ Person({@required String name = 'Default', @required int age = 0}) {
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    questionIndex++;
+    print('questionIndex is: ');
+    print(questionIndex);
+  }
+
   @override
   // Build returns the so-called "widget tree"
   // which tells Flutter what to draw on the screen.
   Widget build(BuildContext context) {
+    var questions = [
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?'
+    ];
+
     return MaterialApp(
       // Home widget is Scaffold
       home: Scaffold(
         // It contains the widget AppBar
         appBar: AppBar(
           // Which contains the Text widget as a title
-          title: Text(
-              '~My little poem~'),
+          title: Text('My First App'),
         ),
-        body: Text('''Roses are red,
-Violets are bule,
-\nUnexpected { on line 32...'''),
+        body: Column(
+          children: [
+            Text(
+              questions[questionIndex],
+            ),
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: () => print('Answer 2 chosen!'),
+            ),
+            RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: () => print('Answer 3 chosen!'),
+            ),
+          ],
+        ),
       ),
     );
   }
